@@ -1,10 +1,13 @@
 import { useState } from 'react';
 
-function Project({ projectName, description, technologies, onViewClick }) {
+function Project({ projectName, imgSrc, description, technologies, viewLink }) {
     return (
         <div className="project-card-new">
             <div className="card-content-new">
                 <h3 className="project-title-new">{projectName}</h3>
+                <div className='project-image-container'>
+                    <img src={imgSrc} alt={projectName} className='project-image'/>
+                </div>
                 <p className="project-description-new">{description}</p>
                 
                 <div className="tech-tags-new">
@@ -13,7 +16,13 @@ function Project({ projectName, description, technologies, onViewClick }) {
                     ))}
                 </div>
                 <div className="project-buttons-new">
-                    <button className="btn-primary-new" onClick={() => onViewClick(projectName)}>View</button>
+                    <a 
+                        href={viewLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="btn-primary-new" 
+                        style={{ textDecoration: 'none', display: 'block', textAlign: 'center' }}
+                    >View</a>
                     {/* <button className="btn-secondary-new">Code</button> */}
                 </div>
             </div>
@@ -22,77 +31,63 @@ function Project({ projectName, description, technologies, onViewClick }) {
     )
 }
 
-function ProjectModal ({ isOpen, onClose, projectName }) {
-    if (!isOpen) return null;
-
-    return (
-        <div className='modal-overlay' onClick={onClose}>   
-            <div className='model-content'>
-                <button className='modal-close' onClick={onClose}>x</button>
-                <h2 className='modal-title'>{projectName}</h2>
-                <p className='modal-description'>More details soon!</p>
-            </div>
-        </div>
-    )
-}
-
 
 function Projects () {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedProject, setSelectedProject] = useState("");
 
     const projects = [
         {
             title: "NeuroLearn", 
             description: "A Personalized Study Guide Website - NeuroLearn helps neurodiverse learners turn slides into study plans that actually work for them - tailored by AI to fit how they learn best.",
-            technologies: ["Python", "Flask", "SQL", "HTML", "JavaScript", "CSS"]
+            technologies: ["Python", "Flask", "SQL", "HTML", "JavaScript", "CSS"],
+            viewLink: "https://github.com/mswq/NeuroLearn"
         }, 
         {
             title: "PathGuide",
             description: "See with sound - PathGuide uses your webcam to detect objects and speaks them to you in real time.",
-            technologies: ["PYTHON+", "React", "HTML", "Javascript", "CSS"]
+            technologies: ["PYTHON+", "React", "HTML", "Javascript", "CSS"],
+            viewLink: "https://github.com/mswq/PathGuide"
         },
         {
             title: "Gesture Camera",
+            imgSrc: "projectFace/Gesture-Camera.png",
             description: "Real-Time Hand Gesture Recognition System + ", 
-            technologies: ["Python", "OpenCV", "MediaPipe"]
+            technologies: ["Python", "OpenCV", "MediaPipe"],
+            viewLink: "https://github.com/mswq/Gesture-Camera"
         }, 
         {
             title: "Finance Assistant",
             description: "A clean money tracker that makes your finances visual and intuitive. From colorful charts to monthly insights, it’s budgeting - but friendly.",
-            technologies: ["Python", "Django", "HTML", "CSS"]
+            technologies: ["Python", "Django", "HTML", "CSS"],
+            viewLink: "https://github.com/mswq/Finance-Assistant"
         },
         {
             title: "Mental Health Bot",
+            imgSrc: "projectFace/Mental-Health-Bot.png",
             description: "Responsive Emotion-Driven Discord Bot",
-            technologies: ["Python"]
+            technologies: ["Python"],
+            viewLink: "https://github.com/mswq/Mental-Health-Bot"
         }, 
         {
             title: "Maze Solver",
+            imgSrc: "projectFace/Maze-Solver.png",
             description: "A simple project that builds random mazes that BFS and DFS solve step-by-step, with clear terminal visuals and GIFs to highlight their distinct behaviors.",
-            technologies: ["Python"]
+            technologies: ["Python"],
+            viewLink: "https://github.com/mswq/Maze-Solver"
         },
         {
             title: "Personal Website",
             description: "A website about me",
-            technologies: ["React", "Javascript", "Three.js", "HTML", "CSS"]
+            technologies: ["React", "Javascript", "Three.js", "HTML", "CSS"],
+            viewLink: "https://github.com/mswq/Me"
         },
         {
             title: "Medicine Dispensing Device",
+            imgSrc: "projectFace/Medication-Dispensor.png",
             description: "A smarter way to stay on schedule with meds. This STM32-powered dispenser helps hospitals and caregivers deliver precise doses on time.",
-            technologies: ["C"]
+            technologies: ["C"],
+            viewLink: "https://github.com/mswq/Medication-Dispensor"
         }
     ]
-
-    const handleViewClick = (projectName) => {
-        setSelectedProject(projectName);
-        setIsModalOpen(true);
-    }
-
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
-        setSelectedProject("");
-    }
  
     return (
         <div className="projects-container">
@@ -102,14 +97,14 @@ function Projects () {
                         <Project 
                             key={index} 
                             projectName={project.title} 
+                            imgSrc={project.imgSrc}
                             description={project.description} 
                             technologies={project.technologies} 
-                            onViewClick={handleViewClick}
+                            viewLink={project.viewLink}
                         />
                     ))}
 
                 </div>
-                <ProjectModal isOpen={isModalOpen} onClose={handleCloseModal} projectName={selectedProject} />
         </div>
     )
 }

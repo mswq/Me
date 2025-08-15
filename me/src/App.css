@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -22,7 +23,7 @@ body {
 
 .hero-title {
   position: absolute;
-  top: 10%;
+  top: 10vh;
   left: 50%;
   transform: translateX(-50%);
   font-size: 2rem;
@@ -38,7 +39,6 @@ body {
   width: 100vw;
   position: relative;
 }
-
 
 /* Navigation styles (for Layout component) */
 .navigation {
@@ -116,6 +116,7 @@ body {
   }
 }
 
+/* Project Card with Image Support */
 .project-card-new {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
@@ -126,7 +127,9 @@ body {
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  min-height: 120px;
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card-new::before {
@@ -153,11 +156,53 @@ body {
   opacity: 1;
 }
 
+/* Project Image Container */
+.project-image-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+}
+
+/* Project Image */
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+/* Image hover effect */
+.project-card-new:hover .project-image {
+  transform: scale(1.05);
+}
+
+/* Optional: Add overlay for better text readability on images */
+.project-image-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card-new:hover .project-image-container::after {
+  opacity: 1;
+}
+
 /* Card content */
 .card-content-new {
-  padding: 2rem;
+  padding: 1.5rem 2rem 2rem;
   position: relative;
   z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-title-new {
@@ -186,9 +231,11 @@ body {
 .project-description-new {
   color: rgba(0, 0, 0, 0.8);
   margin-bottom: 1.5rem;
+  margin-top: 30px;
   line-height: 1.6;
   font-size: 0.95rem;
   font-weight: 300;
+  flex: 1;
 }
 
 /* Technology tags with glassmorphism */
@@ -205,8 +252,6 @@ body {
   color: rgba(0, 0, 0, 0.7);
   font-size: 0.75rem;
   font-weight: 300;
-  /* border-radius: 8px; */
-  /* transition: all 0.3s ease; */
 }
 
 .tech-tag-new:hover {
@@ -219,6 +264,7 @@ body {
 .project-buttons-new {
   display: flex;
   gap: 0.75rem;
+  margin-top: auto;
 }
 
 .btn-primary-new {
@@ -274,8 +320,16 @@ body {
     margin-bottom: 2rem;
   }
   
+  .project-image-container {
+    height: 150px;
+  }
+  
+  .project-card-new {
+    min-height: 350px;
+  }
+  
   .card-content-new {
-    padding: 1.5rem;
+    padding: 1rem 1.5rem 1.5rem;
   }
   
   .project-title-new {
@@ -286,7 +340,6 @@ body {
     flex-direction: column;
   }
 }
-
 
 /* Animations */
 @keyframes fadeInUp {
@@ -335,5 +388,3 @@ body {
     font-size: 1rem;
   }
 }
-
-
