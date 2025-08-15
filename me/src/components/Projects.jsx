@@ -1,4 +1,6 @@
-function Project({ projectName, description, technologies }) {
+import { useState } from 'react';
+
+function Project({ projectName, description, technologies, onViewClick }) {
     return (
         <div className="project-card-new">
             <div className="card-content-new">
@@ -11,8 +13,8 @@ function Project({ projectName, description, technologies }) {
                     ))}
                 </div>
                 <div className="project-buttons-new">
-                    <button className="btn-primary-new">View</button>
-                    <button className="btn-secondary-new">Code</button>
+                    <button className="btn-primary-new" onClick={() => onViewClick(projectName)}>View</button>
+                    {/* <button className="btn-secondary-new">Code</button> */}
                 </div>
             </div>
         </div>
@@ -20,8 +22,25 @@ function Project({ projectName, description, technologies }) {
     )
 }
 
+function ProjectModal ({ isOpen, onClose, projectName }) {
+    if (!isOpen) return null;
+
+    return (
+        <div className='modal-overlay' onClick={onClose}>   
+            <div className='model-content'>
+                <button className='modal-close' onClick={onClose}>x</button>
+                <h2 className='modal-title'>{projectName}</h2>
+                <p className='modal-description'>More details soon!</p>
+            </div>
+        </div>
+    )
+}
+
 
 function Projects () {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedProject, setSelectedProject] = useState("");
+
     const projects = [
         {
             title: "NeuroLearn", 
@@ -65,15 +84,32 @@ function Projects () {
         }
     ]
 
+    const handleViewClick = (projectName) => {
+        setSelectedProject(projectName);
+        setIsModalOpen(true);
+    }
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setSelectedProject("");
+    }
+ 
     return (
         <div className="projects-container">
             <h1 className="project-title">My Work</h1>
                 <div className="projects-grid-new">
                     {projects.map((project, index) => (
-                        <Project key={index} projectName={project.title} description={project.description} technologies={project.technologies} />
+                        <Project 
+                            key={index} 
+                            projectName={project.title} 
+                            description={project.description} 
+                            technologies={project.technologies} 
+                            onViewClick={handleViewClick}
+                        />
                     ))}
 
                 </div>
+                <ProjectModal isOpen={isModalOpen} onClose={handleCloseModal} projectName={selectedProject} />
         </div>
     )
 }

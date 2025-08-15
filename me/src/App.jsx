@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Home from './components/Home.jsx'
 import './App.css'
+import './Modal.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom' 
 import AboutMe from './components/AboutMe.jsx'
 import Projects from './components/Projects.jsx'
