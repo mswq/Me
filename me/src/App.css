@@ -84,6 +84,17 @@ body {
   color: #4169e1;
 }
 
+/* For the navigation stars container */
+.nav-stars {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 200px;
+  height: 200px;
+  z-index: 1000;
+  pointer-events: auto;
+}
+
 /* Projects page styles to match home page aesthetic */
 .projects-container {
   position: relative;
