@@ -112,33 +112,44 @@ const NavigationStar = ({ position, route, label }) => {
                 <dodecahedronGeometry args={[1, 0]} />
                 <meshStandardMaterial color={baseColor} />
             </mesh>
-            {/* <Text
-                position={[position[0], position[1] + 2.5, position[2]]}
-                fontSize={0.5}
-                color="#000000"
-                anchorX="center"
-                anchorY="middle"
-                font="/fonts/helvetiker_regular.typeface.json"
-            >
-                {label}
-            </Text> */}
         </group>
     );
 }
 
 function Home () {    
+    const [hoveredLabel, setHoveredLabel] = useState('');
+    const [mousePosition, setMousePosition] = useState({x: 0, y: 0});
+
+    const handleMouseMove = (event) => {
+        setMousePosition({ x: event.clientX, y: event.clientY });
+    }
+
     return (
         <div className='home-container'>
             <div>
                 <h1 className='hero-title'>Hello I'm</h1>
             </div>
-            <Canvas className='canvas-container' camera={{position: [0, 0, 15], fov: 60}} >
+
+            <div className="hero-subtitle">
+                Hover over the shapes to explore
+            </div>
+
+            {hoveredLabel && (
+                <div className='hovered-text' style={{
+                    position: 'fixed',
+                    left: mousePosition.x + 15,
+                    top: mousePosition.y - 30,
+                }}>
+                    {hoveredLabel}
+                </div>
+            )}
+            <Canvas className='canvas-container' camera={{position: [0, 0, 15], fov: 60}} onPointerMove={handleMouseMove}>
                 <ambientLight intensity={0.8}/>
                 <directionalLight position={[10, 10, 10]} intensity={1} castShadow shadow-mapSize-width={2048} shadow-mapSize-height={2048} />
-                {/* <pointLight position={[-10, -10, -10]} intensity={0.5} color="#6a7170ff" />
-                <pointLight position={[10, -10, -10]} intensity={0.5} color="#5f5454ff" /> */}
+                <pointLight position={[-10, -10, -10]} intensity={0.5} color="#6a7170ff" />
+                <pointLight position={[10, -10, -10]} intensity={0.5} color="#5f5454ff" />
 
-                <group position={[0, 1, 0]}>
+                <group position={[0, 1.25, 0]}>
                     <Letters position={[-10.0, 0, 0]} delay={0}>A</Letters>
                     <Letters position={[-6.0, 0, 0]} delay={0.2}>S</Letters>
                     <Letters position={[-2.0, 0, 0]} delay={0.4}>H</Letters>
@@ -146,19 +157,24 @@ function Home () {
                     <Letters position={[6.0, 0, 0]} delay={0.8}>E</Letters>
                     <Letters position={[10.0, 0, 0]} delay={1.0}>Y</Letters>
                 </group>
-                <Text
-                    position={[0, -1, 8]}
-                    fontSize={0.8}
-                    color="#000000"
-                    anchorX="center"
-                    anchorY="middle"
-                    font="/fonts/helvetiker_regular.typeface.json"
+                <group 
+                    onPointerEnter={() => setHoveredLabel('Home')}
+                    onPointerLeave={() => setHoveredLabel('')}
                 >
-                    More about me...
-                </Text>
-                <NavigationStar position={[-4, -2, 8]} route="/" label="Home"/>
-                <NavigationStar position={[0, -2, 8]} route="/aboutme" label="About Me" />
-                <NavigationStar position={[4, -2, 8]} route="/projects" label="Projects" />
+                    <NavigationStar position={[-4, -2.2, 8]} route="/" label="Home"/>
+                </group>
+                <group 
+                    onPointerEnter={() => setHoveredLabel('About Me')}
+                    onPointerLeave={() => setHoveredLabel('')}
+                >
+                    <NavigationStar position={[0, -2.2, 8]} route="/aboutme" label="About Me" />
+                </group>
+                <group 
+                    onPointerEnter={() => setHoveredLabel('Projects')}
+                    onPointerLeave={() => setHoveredLabel('')}
+                >
+                    <NavigationStar position={[4, -2.2, 8]} route="/projects" label="Projects" />
+                </group>
             </Canvas>
 
         </div>

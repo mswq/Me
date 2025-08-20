@@ -37,36 +37,32 @@ function Projects () {
     const projects = [
         {
             title: "NeuroLearn", 
+            imgSrc: "projectFace/NeuroLearn.png",
             description: "A Personalized Study Guide Website - NeuroLearn helps neurodiverse learners turn slides into study plans that actually work for them - tailored by AI to fit how they learn best.",
             technologies: ["Python", "Flask", "SQL", "HTML", "JavaScript", "CSS"],
             viewLink: "https://github.com/mswq/NeuroLearn"
         }, 
         {
             title: "PathGuide",
-            description: "See with sound - PathGuide uses your webcam to detect objects and speaks them to you in real time.",
-            technologies: ["PYTHON+", "React", "HTML", "Javascript", "CSS"],
+            imgSrc: "projectFace/PathGuide.png",
+            description: "See with sound - PathGuide uses your webcam to detect objects and speaks them real time. Designed to support visually impaired users, PathGuide enhances situational awareness and aids navigation.",
+            technologies: ["React", "HTML", "Javascript", "CSS"],
             viewLink: "https://github.com/mswq/PathGuide"
         },
         {
             title: "Gesture Camera",
             imgSrc: "projectFace/Gesture-Camera.png",
-            description: "Real-Time Hand Gesture Recognition System + ", 
+            description: "A vision system that detects hand gestures in real time, enabling sub-second recognition of ASL “help” signs and triggering discreet safety alerts for emergencies.", 
             technologies: ["Python", "OpenCV", "MediaPipe"],
             viewLink: "https://github.com/mswq/Gesture-Camera"
         }, 
         {
             title: "Finance Assistant",
+            imgSrc: "projectFace/Finance-Assistant.png",
             description: "A clean money tracker that makes your finances visual and intuitive. From colorful charts to monthly insights, it’s budgeting - but friendly.",
             technologies: ["Python", "Django", "HTML", "CSS"],
             viewLink: "https://github.com/mswq/Finance-Assistant"
         },
-        {
-            title: "Mental Health Bot",
-            imgSrc: "projectFace/Mental-Health-Bot.png",
-            description: "Responsive Emotion-Driven Discord Bot",
-            technologies: ["Python"],
-            viewLink: "https://github.com/mswq/Mental-Health-Bot"
-        }, 
         {
             title: "Maze Solver",
             imgSrc: "projectFace/Maze-Solver.png",
@@ -76,7 +72,8 @@ function Projects () {
         },
         {
             title: "Personal Website",
-            description: "A website about me",
+            imgSrc: "projectFace/Me.png",
+            description: "A website about me.",
             technologies: ["React", "Javascript", "Three.js", "HTML", "CSS"],
             viewLink: "https://github.com/mswq/Me"
         },
@@ -86,7 +83,14 @@ function Projects () {
             description: "A smarter way to stay on schedule with meds. This STM32-powered dispenser helps hospitals and caregivers deliver precise doses on time.",
             technologies: ["C"],
             viewLink: "https://github.com/mswq/Medication-Dispensor"
-        }
+        },
+        {
+            title: "Mental Health Bot",
+            imgSrc: "projectFace/Mental-Health-Bot.png",
+            description: "Dr. Jabes is a 24/7 Discord Bot that promotes mental wellness through a compassionate presence. Acting as a supportive 'buddy' it listens, comforts, and offers features like joke-telling, and quote-reciting to uplift users.",
+            technologies: ["Python"],
+            viewLink: "https://github.com/mswq/Mental-Health-Bot"
+        }, 
     ]
  
     return (
