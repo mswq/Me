@@ -5,11 +5,14 @@ import Star from "./Star.jsx";
 const NavStars = () => {
     const starData = [
         { route: "/",  label: "Home" },
-        { route: "/aboutme", label: "About" },
-        { route: "/projects", label: "Projects" }
+        // { route: "/experience", label: "Experience" },
+        // { route: "/aboutme", label: "About" },
+        // { route: "/projects", label: "Projects" }
+        
     ];
 
-    const navPositions = [[2, 2, 2], [2, 0, 2], [2, -2, 2]];
+    // const navPositions = [[-4 , 0, 1.5], [-2, 0, 1.5], [0, 0, 1.5], [2, 0, 1.5]];
+    const navPositions = [[0, 0, 7]]
 
     return (
         <Canvas className="canvas-container" camera={{ position: [0, 0, 10], fov: 50 }}
@@ -24,7 +27,8 @@ const NavStars = () => {
             >
             <ambientLight intensity={0.6}/>
             <directionalLight position={[10, 10, 10]} intensity={0.8} />
-
+            
+            
             {starData.map((star, index) => (
                 <Star 
                     key={star.label} 

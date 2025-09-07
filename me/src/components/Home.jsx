@@ -27,15 +27,9 @@ const Letters = ({ position, children, delay}) => {
             const targetScale = hovered ? 1.5 : clicked ? 0.8: 1.2;
             meshRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.05);
 
-            // Color Transitions
             if (meshRef.current.material) {
                 const targetColor = hovered ? hoverColor : clicked ? clickColor : letterColor;
                 meshRef.current.material.color.lerp(targetColor, 0.05)
-
-                // // + Glow
-                // meshRef.current.material.emissive.lerp(
-                //     hovered ? new THREE.Color('#333333').multiplyScalar(0.1) : new THREE.Color('#000000'), 0.1
-                // );
             }
         }
     });
@@ -158,10 +152,10 @@ function Home () {
                     <Letters position={[10.0, 0, 0]} delay={1.0}>Y</Letters>
                 </group>
                 <group 
-                    onPointerEnter={() => setHoveredLabel('Home')}
+                    onPointerEnter={() => setHoveredLabel('Experience')}
                     onPointerLeave={() => setHoveredLabel('')}
                 >
-                    <NavigationStar position={[-4, -2.2, 8]} route="/" label="Home"/>
+                    <NavigationStar position={[-4, -2.2, 8]} route="/experience" label="Experience"/>
                 </group>
                 <group 
                     onPointerEnter={() => setHoveredLabel('About Me')}
