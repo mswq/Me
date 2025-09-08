@@ -57,9 +57,9 @@ function Projects () {
             viewLink: "https://github.com/mswq/Gesture-Camera"
         }, 
         {
-            title: "Finance Assistant",
+            title: "AI Finance Assistant",
             imgSrc: "projectFace/Finance-Assistant.png",
-            description: "A clean money tracker that makes your finances visual and intuitive. From colorful charts to monthly insights, it’s budgeting - but friendly.",
+            description: "A clean money tracker that makes your finances visual and intuitive. From monthly insights to automated product logging from receipts, it’s budgeting - but friendly.",
             technologies: ["Python", "Django", "HTML", "CSS"],
             viewLink: "https://github.com/mswq/Finance-Assistant"
         },
