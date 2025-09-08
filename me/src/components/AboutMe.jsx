@@ -12,11 +12,6 @@ function AboutMe() {
                             What excites me most is applying these technologies to fields like medical devices and healthcare, where they can directly improve lives. 
                             I love exploring new innovations, building systems that combine intelligence with impact, and pushing myself to learn something new every day.
                         </p>
-                        <p>
-                            When I'm not coding, you'll find me exploring new technologies, working on 
-                            personal projects, or diving deep into research papers about the latest 
-                            advancements in AI and machine learning.
-                        </p>
                     </div>
                 </div>
 
