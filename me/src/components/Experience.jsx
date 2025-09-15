@@ -28,11 +28,13 @@ function Experiences() {
             location: "Tillsonburg, London",
             date: "May 2025 - Aug 2025",
             bulletPoints: [
-                "Developed a real-time vision system using IP cameras to detect unsecured chains on tow vehicles, improving safety",
-                "Built a synthetic dataset with custom OpenCV pipelines, improving weld defect detection model accuracy by 2%",
-                "Implemented a PID system to automate adhesive control via PLC signals and web scraping to calculate temperature setpoints, keeping the volume deviation within ±5%",
-                "Deployed a SQL database with an Ignition Perspective dashboard to provide real-time safety incident insights"
+                "Developed a computer vision system using YOLO v8 and OpenCV to identify unrestrained carts on assembly line vehicles by processing 20 fps video streams, improving safety",
+                "Built an OpenCV-based data augmentation pipeline to generate training images for weld defect classification models",
+                "Designed a PID-based adhesive control system with PLC integration and automated data acquisition using Selenium and BeautifulSoup, achieving ±5% in material volume deviation",
+                "Replaced polling-based acquisition with direct CGI requests to PLCs, cutting response time from 800ms to 400ms",
+                "Designed SQL Server–backed Ignition Perspective dashboard showing live production metrics and safety alerts"
             ]
+            
         },
         {
             role: "Firmware and Hardware Designer",
@@ -40,11 +42,11 @@ function Experiences() {
             location: "Kitchener, Waterloo",
             date: "Sept 2025 - Aug 2025",
             bulletPoints: [
-                "Implemented a multithreaded SPI software abstraction with synchronization, ensuring reliable 5 MHz data transfer between microcontrollers and peripherals",
-                "Developed a GPIO management library for the vehicle’s software-in-the-loop system for accurate hardware setup",
-                "Integrated a dynamic deadzone in the pedal interface, recalibrating the range to 30% - 100% , addressing delayed pedal control and enhance precision",
                 "Redesigned the center console PCB in Altium to optimize hall effect sensor integration and enable PWM-based variable brightness control",
-                "Developed STM32 real-time applications with FreeRTOS, optimizing tasks via multi-priority and queues"
+                "Developed STM32 real-time applications with FreeRTOS, optimizing tasks via multi-priority and queues",
+                "Implemented a multithreaded SPI software abstraction with synchronization, ensuring reliable 5 MHz data transfer between microcontrollers and peripherals",
+                "Developed a GPIO management library for the vehicle's software-in-the-loop system for accurate hardware setup",
+                "Integrated a dynamic deadzone in the pedal interface, recalibrating the input range to enhance precision"
             ]
         }
     ]

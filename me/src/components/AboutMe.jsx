@@ -33,13 +33,14 @@ function AboutMe() {
                                 </div>
                             </div>
                             <div className="skill-category">
-                                <h4>Frameworks</h4>
-                                <div className="skill-tags">
+                                <h4>Frameworks and Libraries</h4>
+                                <div className ="skill-tags">
                                     <span className="skill-tag">OpenCV</span>
                                     <span className="skill-tag">Mediapipe</span>
                                     <span className="skill-tag">React.js</span>
                                     <span className="skill-tag">Django</span>
                                     <span className="skill-tag">Flask</span>
+                                    <span className="skill-tag">Selenium</span>
                                     <span className="skill-tag">Bootstrap</span>
                                     <span className="skill-tag">Blender</span>
                                     <span className="skill-tag">Three.js</span>
@@ -81,9 +82,9 @@ function AboutMe() {
                          I’m also an animal lover, and I enjoy connecting with people over shared passions, whether it’s technology, art, or the outdoors.
 
                     </p>
-                    <p>
+                    {/* <p>
                         Feel free to reach out if you’d like to chat about AI, collaborate on a project, or discuss how technology can make the world a little better.
-                    </p>
+                    </p> */}
                 </div>
             </div>
         </div>

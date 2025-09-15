@@ -50,19 +50,19 @@ function Projects () {
             viewLink: "https://github.com/mswq/PathGuide"
         },
         {
-            title: "Gesture Camera",
-            imgSrc: "projectFace/Gesture-Camera.png",
-            description: "A vision system that detects hand gestures in real time, enabling sub-second recognition of ASL “help” signs and triggering discreet safety alerts for emergencies.", 
-            technologies: ["Python", "OpenCV", "MediaPipe"],
-            viewLink: "https://github.com/mswq/Gesture-Camera"
-        }, 
-        {
             title: "AI Finance Assistant",
             imgSrc: "projectFace/Finance-Assistant.png",
             description: "A clean money tracker that makes your finances visual and intuitive. From monthly insights to automated product logging from receipts, it’s budgeting - but friendly.",
             technologies: ["Python", "Django", "HTML", "CSS"],
             viewLink: "https://github.com/mswq/Finance-Assistant"
         },
+        {
+            title: "Gesture Camera",
+            imgSrc: "projectFace/Gesture-Camera.png",
+            description: "A vision system that detects hand gestures in real time, enabling sub-second recognition of ASL “help” signs and triggering discreet safety alerts for emergencies.", 
+            technologies: ["Python", "OpenCV", "MediaPipe"],
+            viewLink: "https://github.com/mswq/Gesture-Camera"
+        }, 
         {
             title: "Maze Solver",
             imgSrc: "projectFace/Maze-Solver.png",
