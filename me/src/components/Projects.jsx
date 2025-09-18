@@ -95,7 +95,7 @@ function Projects () {
  
     return (
         <div className="projects-container">
-            <h1 className="project-title">My Work</h1>
+            <h1 className="experiences-title">My Work</h1>
                 <div className="projects-grid-new">
                     {projects.map((project, index) => (
                         <Project 

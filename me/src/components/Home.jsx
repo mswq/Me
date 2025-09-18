@@ -113,10 +113,63 @@ const NavigationStar = ({ position, route, label }) => {
 function Home () {    
     const [hoveredLabel, setHoveredLabel] = useState('');
     const [mousePosition, setMousePosition] = useState({x: 0, y: 0});
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     const handleMouseMove = (event) => {
         setMousePosition({ x: event.clientX, y: event.clientY });
     }
+
+    const getCameraSettings = () => {
+        if (isMobile) {
+            // Much further back and wider FOV for mobile
+            return {
+                position: [0, 0, 22],  // Even further back
+                fov: 75,               // Maximum practical FOV
+            };
+        }
+        return {
+            position: [0, 0, 15],
+            fov: 60,
+        };
+    };
+
+    const getScaleFactor = () => {
+        if (typeof window !== 'undefined') {
+            const screenWidth = window.innerWidth;
+            // Dynamic scaling based on actual screen width - ONLY for home page
+            if (screenWidth <= 480) {
+                return 0.5; // Very small screens
+            } else if (screenWidth <= 768) {
+                return 0.7; // Mobile screens
+            } else if (screenWidth <= 1024) {
+                return 0.8; // Tablet screens
+            }
+        }
+        return 1.0; // Desktop
+    };
+
+    const getLetterPosition = () => {
+        return isMobile ? [0, 4, 0] : [0, 1.25, 0]; // Only move up on mobile
+    };
+
+    const getStarYPosition = () => {
+        return isMobile ? -7: -2.2; // Only move down on mobile
+    };
+
+    const cameraSettings = getCameraSettings();
+    const scaleFactor = getScaleFactor();
+    const letterPosition = getLetterPosition();
+    const starY = getStarYPosition();
 
     return (
         <div className='home-container'>
@@ -137,13 +190,24 @@ function Home () {
                     {hoveredLabel}
                 </div>
             )}
-            <Canvas className='canvas-container' camera={{position: [0, 0, 15], fov: 60}} onPointerMove={handleMouseMove}>
+            <Canvas className='canvas-container' 
+                camera={cameraSettings} 
+                onPointerMove={handleMouseMove} 
+                style={{
+                        width: '100%',
+                        height: '100%',
+                        display: 'block'
+                }}
+                gl={{
+                    antialias: true,
+                    alpha: true,
+                }}>
                 <ambientLight intensity={0.8}/>
                 <directionalLight position={[10, 10, 10]} intensity={1} castShadow shadow-mapSize-width={2048} shadow-mapSize-height={2048} />
                 <pointLight position={[-10, -10, -10]} intensity={0.5} color="#6a7170ff" />
                 <pointLight position={[10, -10, -10]} intensity={0.5} color="#5f5454ff" />
 
-                <group position={[0, 1.25, 0]}>
+                <group position={letterPosition} scale={[scaleFactor, scaleFactor, scaleFactor]}>
                     <Letters position={[-10.0, 0, 0]} delay={0}>A</Letters>
                     <Letters position={[-6.0, 0, 0]} delay={0.2}>S</Letters>
                     <Letters position={[-2.0, 0, 0]} delay={0.4}>H</Letters>
@@ -151,23 +215,25 @@ function Home () {
                     <Letters position={[6.0, 0, 0]} delay={0.8}>E</Letters>
                     <Letters position={[10.0, 0, 0]} delay={1.0}>Y</Letters>
                 </group>
-                <group 
-                    onPointerEnter={() => setHoveredLabel('Experience')}
-                    onPointerLeave={() => setHoveredLabel('')}
-                >
-                    <NavigationStar position={[-4, -2.2, 8]} route="/experience" label="Experience"/>
-                </group>
-                <group 
-                    onPointerEnter={() => setHoveredLabel('About Me')}
-                    onPointerLeave={() => setHoveredLabel('')}
-                >
-                    <NavigationStar position={[0, -2.2, 8]} route="/aboutme" label="About Me" />
-                </group>
-                <group 
-                    onPointerEnter={() => setHoveredLabel('Projects')}
-                    onPointerLeave={() => setHoveredLabel('')}
-                >
-                    <NavigationStar position={[4, -2.2, 8]} route="/projects" label="Projects" />
+                <group scale={[scaleFactor, scaleFactor, scaleFactor]}>
+                    <group 
+                        onPointerEnter={() => setHoveredLabel('Experience')}
+                        onPointerLeave={() => setHoveredLabel('')}
+                    >
+                        <NavigationStar position={[-4, starY, 8]} route="/experience" label="Experience"/>
+                    </group>
+                    <group 
+                        onPointerEnter={() => setHoveredLabel('About Me')}
+                        onPointerLeave={() => setHoveredLabel('')}
+                    >
+                        <NavigationStar position={[0, starY, 8]} route="/aboutme" label="About Me" />
+                    </group>
+                    <group 
+                        onPointerEnter={() => setHoveredLabel('Projects')}
+                        onPointerLeave={() => setHoveredLabel('')}
+                    >
+                        <NavigationStar position={[4, starY, 8]} route="/projects" label="Projects" />
+                    </group>
                 </group>
             </Canvas>
 

@@ -1,8 +1,34 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Canvas } from "@react-three/fiber";
 import Star from "./Star.jsx";
 
 const NavStars = () => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    const getCameraSettings = () => {
+        if (isMobile) {
+            // Much further back and wider FOV for mobile
+            return {
+                position: [0, 0, 12],  // Even further back
+                fov: 60,               // Maximum practical FOV
+            };
+        }
+        return {
+            position: [0, 0, 10],
+            fov: 60,
+        };
+    };
+
     const starData = [
         { route: "/",  label: "Home" },
         // { route: "/experience", label: "Experience" },
@@ -12,10 +38,10 @@ const NavStars = () => {
     ];
 
     // const navPositions = [[-4 , 0, 1.5], [-2, 0, 1.5], [0, 0, 1.5], [2, 0, 1.5]];
-    const navPositions = [[0, 0, 7]]
+    const navPositions = isMobile ? [[1.5, 1, 6]]:[[0, 0, 7]]
 
     return (
-        <Canvas className="canvas-container" camera={{ position: [0, 0, 10], fov: 50 }}
+        <Canvas className="canvas-container" camera={getCameraSettings()}
             style={{ 
                     position: 'fixed',
                     top:  '8px',
