@@ -2,10 +2,13 @@ import { useState } from 'react'
 import Home from './components/Home.jsx'
 import './App.css'
 import './Projects.css'
+import './Experiences.css'
+import './AboutMe.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom' 
 import AboutMe from './components/AboutMe.jsx'
 import Projects from './components/Projects.jsx'
 import Layout from './components/Layout.jsx'
+import Experiences from './components/Experience.jsx'
 
 function App() {
   return (
@@ -15,6 +18,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="aboutme" element={<AboutMe />} />
             <Route path="projects" element={<Projects />} />
+            <Route path="experience" element={<Experiences />} />
           </Route>
       </Routes>
     </BrowserRouter>
