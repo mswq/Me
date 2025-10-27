@@ -36,11 +36,11 @@ function Projects () {
 
     const projects = [
         {
-            title: "NeuroLearn", 
-            imgSrc: "projectFace/NeuroLearn.png",
-            description: "A Personalized Study Guide Website - NeuroLearn helps neurodiverse learners turn slides into study plans that actually work for them - tailored by AI to fit how they learn best.",
-            technologies: ["Python", "Flask", "SQL", "HTML", "JavaScript", "CSS"],
-            viewLink: "https://github.com/mswq/NeuroLearn"
+            title: "Coinpilot.", 
+            imgSrc: "projectFace/Coinpilot.png",
+            description: "Coinpilot is an AI-powered cryptocurrency simulator that helps newcomers learn trading through conversational guidance, real-time market data, and risk-free transaction simulations",
+            technologies: ["Next.js", "React", "Flask", "Python", "Gemini API", "Coinbase API"],
+            viewLink: "https://coinpilot.biz/home"
         }, 
         {
             title: "PathGuide",
@@ -55,6 +55,13 @@ function Projects () {
             description: "A vision system that detects hand gestures in real time, enabling sub-second recognition of ASL “help” signs and triggering discreet safety alerts for emergencies.", 
             technologies: ["Python", "OpenCV", "MediaPipe"],
             viewLink: "https://github.com/mswq/Gesture-Camera"
+        }, 
+        {
+            title: "NeuroLearn", 
+            imgSrc: "projectFace/NeuroLearn.png",
+            description: "A Personalized Study Guide Website - NeuroLearn helps neurodiverse learners turn slides into study plans that actually work for them - tailored by AI to fit how they learn best.",
+            technologies: ["Python", "Flask", "SQL", "HTML", "JavaScript", "CSS"],
+            viewLink: "https://github.com/mswq/NeuroLearn"
         }, 
         {
             title: "Finance Assistant",
