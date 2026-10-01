@@ -1,12 +1,22 @@
+import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import NavStars from "./NavStars";
+import NavShapes from "./NavShapes";
+import { NAV_ITEMS } from "../navItems.js";
 
 const Layout = () => {
-    const location = useLocation();
-    const isHome = location.pathname === "/";
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+
     return (
         <>
-            {!isHome && <NavStars isHome={false} />}
+            {pathname !== "/" && (
+                <header className="site-header">
+                    <NavShapes items={NAV_ITEMS} labelHeight={20} className="site-nav" />
+                </header>
+            )}
             <Outlet />
         </>
     )

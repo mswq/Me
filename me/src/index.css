@@ -1,11 +1,7 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --bg: #c5baba;
+  --text: rgba(0, 0, 0, 0.8);
+  --text-muted: rgba(0, 0, 0, 0.7);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,56 +9,511 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 300;
+  line-height: 1.5;
   min-width: 320px;
-  min-height: 100vh;
+  background: var(--bg);
+  color: #000000;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+/* Home page - everything is placed as a share of the screen so it holds on any aspect ratio */
+.home-container {
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 320px;
+  overflow: hidden;
+}
+
+.hero-title,
+.hero-subtitle {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  text-align: center;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+.hero-title {
+  top: 9%;
+  font-size: clamp(1.4rem, 4vh, 2rem);
+  animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+.hero-subtitle {
+  top: 56%;
+  font-size: clamp(0.95rem, 2.6vh, 1.25rem);
+}
+
+.icon {
+  flex: none;
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.home-nav {
+  position: absolute;
+  top: 62%;
+  left: 50%;
+  translate: -50% 0;
+  width: min(94%, 1100px);
+  /* never taller than a square cell plus its label, so labels stay close to the shapes */
+  height: min(34%, calc(min(94vw, 1100px) / 3 + var(--label-height)));
+  font-size: clamp(0.9rem, 2.4vh, 1.1rem);
+}
+
+/* Shape navigation - one link per column, the canvas behind draws a shape above each label */
+.shape-nav {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--count), 1fr);
+}
+
+.shape-link {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  line-height: var(--label-height);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.shape-link:hover,
+.shape-link:focus-visible,
+.shape-link.active {
+  color: #000000;
+}
+
+.shape-link.active {
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.shape-link:focus-visible {
+  outline: 1px solid rgba(0, 0, 0, 0.5);
+  outline-offset: -2px;
+  border-radius: 10px;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 24px 4px;
+  background: var(--bg);
+}
+
+.site-nav {
+  width: min(100%, 360px);
+  height: 80px;
+  font-size: 0.7rem;
+}
+
+.site-nav .shape-link {
+  letter-spacing: 0.05em;
+}
+
+/* Content pages */
+.page {
+  padding: 16px 40px 40px;
+}
+
+.page-title {
+  margin-bottom: 2.5rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.page-content {
+  display: grid;
+  gap: 2rem;
+  max-width: 1350px;
+  margin: 0 auto;
+}
+
+/* Cards */
+.card {
+  position: relative;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease,
+    border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+}
+
+.card p {
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  padding: 0.3rem 0.75rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+/* Pill controls - the project filters and the contact links */
+.filter,
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.filter:hover,
+.contact-link:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.filter[aria-pressed='true'] {
+  background: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #000000;
+}
+
+.filter:focus-visible,
+.contact-link:focus-visible {
+  outline: 1px solid rgba(0, 0, 0, 0.5);
+  outline-offset: 2px;
+}
+
+/* About page - open sections split by a rule, heading on the left and content on the right */
+.about {
+  gap: 3rem;
+  max-width: 1100px;
+}
+
+.about p {
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+.about .about-intro {
+  font-size: 1.2rem;
+  line-height: 1.7;
+}
+
+.about-section {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1rem 3rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.about-heading {
+  font-size: 1.3rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.about-item + .about-item {
+  margin-top: 1.5rem;
+}
+
+.about-item h4 {
+  margin-bottom: 0.6rem;
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+}
+
+/* Experiences page - logo beside the heading, bullets underneath at full width */
+.experience-top {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.experience-logo {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.experience-heading {
+  flex: 1;
+  min-width: 0;
+}
+
+.experience-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.experience-header .card-title {
+  margin-bottom: 0;
+}
+
+.experience-date {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.experience-company {
+  margin-bottom: 0;
+  color: var(--text);
+  letter-spacing: 0.03em;
+}
+
+.experience-location {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 0.85rem;
+}
+
+.experience-bullets {
+  display: grid;
+  gap: 0.75rem;
+  padding-left: 1.2rem;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+.experience-bullets li::marker {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* Projects page */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: -1rem 0 2.5rem;
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 2rem 2rem;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+}
+
+.project-card .card-title {
+  margin-bottom: 1rem;
+}
+
+.project-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.card .project-description {
+  flex: 1;
+  margin: 1.5rem 0;
+}
+
+.project-link {
+  margin-top: 1.25rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: #000000;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Stretch the link over the whole card so the card itself is clickable */
+.project-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.project-card:hover .project-link,
+.project-link:focus-visible {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(65, 105, 225, 0.4);
+  box-shadow: 0 8px 25px rgba(65, 105, 225, 0.15);
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    justify-content: center;
+    padding-inline: 8px;
   }
-  a:hover {
-    color: #747bff;
+
+  .page {
+    padding: 8px 20px 20px;
   }
-  button {
-    background-color: #f9f9f9;
+
+  .page-title {
+    margin-bottom: 1.75rem;
+    font-size: 1.8rem;
+  }
+
+  .filters {
+    margin: -0.5rem 0 1.75rem;
+  }
+
+  .page-content,
+  .projects-grid {
+    gap: 1.5rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .card-title,
+  .about-heading {
+    font-size: 1.2rem;
+  }
+
+  .about {
+    gap: 2rem;
+  }
+
+  .about .about-intro {
+    font-size: 1.05rem;
+  }
+
+  .about-section {
+    grid-template-columns: 1fr;
+    padding-top: 2rem;
+  }
+
+  .experience-top {
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .experience-logo {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Short screens (phones held sideways): let the nav scroll away instead of eating the view */
+@media (max-height: 500px) {
+  .site-header {
+    position: static;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
   }
 }
